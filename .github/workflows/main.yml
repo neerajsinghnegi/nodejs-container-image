@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Build and publish Docker Image to GitHub Registry with custom Dockerfile
+        # You may pin to the exact commit or the version.
+        # uses: banool/gp-docker-action@0f2a6dc4c3614571406c854a83d3bc9ee92fde52
+        uses: banool/gp-docker-action@1.0.2
+        with:
+          # GitHub token to push Docker image to GitHub Packages
+          github-token: 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
+          # Docker Image name
+          image-name: demo
+          # Docker Image tag
+          #image-tag: # optional, default is latest
+          # Extract git-tag from repository
+          #extract-git-tag: # optional, default is false
+          # Dockerfile name
+          #dockerfile: # optional, default is Dockerfile
+
+
